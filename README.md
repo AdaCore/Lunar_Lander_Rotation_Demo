@@ -2,9 +2,10 @@
 
 IMPORTANT: Please note that this project exists as part of a blog entry,
 article, or other similar material by AdaCore. It is provided for
-convenient access the software described therein. As such, it is not
+convenient access to the software described therein. As such, it is not
 updated regularly and may, over time, become inconsistent with the
-library or libraries it utilizes (for example, the Ada Drivers Library).
+latest versions of any tools and libraries it utilizes (for example, the
+Ada Drivers Library).
 
 This is a demonstration program that interacts with the AdaFruit BNO055 
 breakout board in order to send orientation data to a host computer.The 
