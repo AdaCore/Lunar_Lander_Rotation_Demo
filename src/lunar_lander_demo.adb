@@ -214,7 +214,6 @@ procedure Lunar_Lander_Demo is
       SDA_AF : GPIO_Alternate_Function;
       Reset  : GPIO_Point)
    is
-      GPIO_Conf            : GPIO_Port_Configuration;
       Selected_Clock_Speed : constant := 10_000;
    begin
       Enable_Clock (SCL);
@@ -225,21 +224,21 @@ procedure Lunar_Lander_Demo is
 
       STM32.Device.Reset (Port.all);
 
-      GPIO_Conf.Speed       := Speed_25MHz;
-      GPIO_Conf.Mode        := Mode_Out;
-      GPIO_Conf.Output_Type := Push_Pull;
-      GPIO_Conf.Resistors   := Floating;
-      Configure_IO (Reset, GPIO_Conf);
+      Configure_IO (Reset, (Mode        => Mode_Out,
+                            Resistors   => Floating,
+                            Output_Type => Push_Pull,
+                            Speed       => Speed_25MHz));
 
-      Configure_Alternate_Function (SCL, SCL_AF);
-      Configure_Alternate_Function (SDA, SDA_AF);
-
-      GPIO_Conf.Speed       := Speed_100MHz;
-      GPIO_Conf.Mode        := Mode_AF;
-      GPIO_Conf.Output_Type := Open_Drain;
-      GPIO_Conf.Resistors   := Pull_Up;
-      Configure_IO (SCL, GPIO_Conf);
-      Configure_IO (SDA, GPIO_Conf);
+      Configure_IO (SCL, (Mode           => Mode_AF,
+                          Resistors      => Pull_Up,
+                          AF_Output_Type => Open_Drain,
+                          AF_Speed       => Speed_100MHz,
+                          AF             => SCL_AF));
+      Configure_IO (SDA, (Mode           => Mode_AF,
+                          Resistors      => Pull_Up,
+                          AF_Output_Type => Open_Drain,
+                          AF_Speed       => Speed_100MHz,
+                          AF             => SDA_AF));
 
       STM32.I2C.Configure
         (Port.all,
