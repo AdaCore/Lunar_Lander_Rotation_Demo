@@ -49,7 +49,7 @@ package Peripherals is
    --  The specific USART selection is arbitrary.
    Peripheral_For_Host : aliased Serial_IO.Peripheral_Descriptor :=
                   (Transceiver    => USART_6'Access,
-                   Transceiver_AF => GPIO_AF_8_USART6,
+                   Transceiver_AF => GPIO_AF_USART6_8,
                    Tx_Pin         => PC6,
                    Rx_Pin         => PC7);
 
@@ -65,7 +65,7 @@ package Peripherals is
    --  and pins (and alternate function) must correspond to the chosen I2C
    --  port.
    Selected_I2C_Port      : constant access I2C_Port := I2C_2'Access;
-   Selected_I2C_Port_AF   : constant GPIO_Alternate_Function := GPIO_AF_4_I2C2;
+   Selected_I2C_Port_AF   : constant GPIO_Alternate_Function := GPIO_AF_I2C2_4;
    Selected_I2C_Clock_Pin : GPIO_Point renames PB10;
    Selected_I2C_Data_Pin  : GPIO_Point renames PB11;
    Selected_HW_Reset_Pin  : GPIO_Point renames PB5; --  PB4;

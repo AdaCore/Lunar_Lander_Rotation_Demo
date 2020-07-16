@@ -38,20 +38,16 @@ package body Serial_IO is
    ----------------
 
    procedure Initialize_Peripheral (Device : access Peripheral_Descriptor) is
-      Configuration : GPIO_Port_Configuration;
       Device_Pins   : constant GPIO_Points := Device.Rx_Pin & Device.Tx_Pin;
    begin
       Enable_Clock (Device_Pins);
       Enable_Clock (Device.Transceiver.all);
 
-      Configuration.Mode        := Mode_AF;
-      Configuration.Speed       := Speed_50MHz;
-      Configuration.Output_Type := Push_Pull;
-      Configuration.Resistors   := Pull_Up;
-
-      Configure_IO (Device_Pins, Configuration);
-
-      Configure_Alternate_Function (Device_Pins, Device.Transceiver_AF);
+      Configure_IO (Device_Pins, (Mode           => Mode_AF,
+                                  Resistors      => Pull_Up,
+                                  AF_Output_Type => Push_Pull,
+                                  AF_Speed       => Speed_50MHz,
+                                  AF             => Device.Transceiver_AF));
    end Initialize_Peripheral;
 
    ---------------
